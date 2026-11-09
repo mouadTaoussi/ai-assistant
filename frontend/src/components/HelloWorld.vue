@@ -362,6 +362,7 @@ code {
 }
 .form-control.message {
 	flex: 1;
+	color: white;
 }
 .form-control.model {
 	width: 170px;
@@ -400,6 +401,7 @@ code {
 .form-control:focus {
 	outline: none;
 }
+
 
 /* .user-message {
 	// background-color: #e0f7fa; 
