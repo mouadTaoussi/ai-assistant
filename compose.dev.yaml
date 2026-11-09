@@ -1,0 +1,48 @@
+services:
+  # Vue.js development server
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+
+    container_name: ai-assistant-frontend-dev
+
+    ports:
+      - "5173:5173"
+
+    volumes:
+      # Synchronize source code
+      - ./frontend:/app
+
+      # Keep Linux node_modules inside container
+      - /app/node_modules
+
+    depends_on:
+      - ai-assistant-backend
+
+    restart: unless-stopped
+
+  # NestJS development server
+  ai-assistant-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+
+    container_name: ai-assistant-backend-dev
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      # Synchronize backend source code
+      - ./backend:/app
+
+      # Keep Linux node_modules inside container
+      - /app/node_modules
+
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      OLLAMA_URL: http://host.docker.internal:11434
+
+    restart: unless-stopped

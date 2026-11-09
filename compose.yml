@@ -1,0 +1,25 @@
+services:
+  ai-assistant-front-end:
+  # image: ghcr.io/mouadTaoussi/ai-assistant:${IMAGE_TAG:-latest}
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ai-assistant-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - ai-assistant-backend
+  ai-assistant-backend:
+  # image: ghcr.io/mouadTaoussi/ai-assistant-backend:${IMAGE_TAG:-latest}
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ai-assistant-backend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      OLLAMA_URL: http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
