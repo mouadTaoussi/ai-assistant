@@ -1,0 +1,26 @@
+{
+  "name": "ai-assistant",
+  "version": "1.0.0",
+  "description": "```\r git clone https://github.com/mouadTaoussi/ai-assistant.git\r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mouadTaoussi/ai-assistant.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mouadTaoussi/ai-assistant/issues"
+  },
+  "homepage": "https://github.com/mouadTaoussi/ai-assistant#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "typescript-eslint": "^8.72.0"
+  }
+}
