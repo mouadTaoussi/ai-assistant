@@ -17,17 +17,17 @@ docker compose -f compose.dev.yaml up
 
 #### To stop running containers 
 ```
-docker compose compose.dev.yaml down
+docker compose -f compose.dev.yaml down
 ```
 
 #### To build containers in production mode 
 ```
-docker compose -f build
+docker compose build
 ```
 
 #### To run containers in production mode
 ```
-docker compose -f up
+docker compose up
 ```
 
 #### To stop running containers 

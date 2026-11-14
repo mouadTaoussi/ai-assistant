@@ -1,20 +1,20 @@
 services:
-  ai-assistant-front-end:
-  # image: ghcr.io/mouadTaoussi/ai-assistant:${IMAGE_TAG:-latest}
+  frontend:
+    image: ghcr.io/mouadtaoussi/ai-assistant-frontend:${IMAGE_TAG:-latest}
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: ai-assistant-frontend
+    container_name: frontend
     ports:
       - "5173:80"
     depends_on:
-      - ai-assistant-backend
-  ai-assistant-backend:
-  # image: ghcr.io/mouadTaoussi/ai-assistant-backend:${IMAGE_TAG:-latest}
+      - backend
+  backend:
+    image: ghcr.io/mouadtaoussi/ai-assistant-backend:${IMAGE_TAG:-latest}
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: ai-assistant-backend
+    container_name: backend
     ports:
       - "3000:3000"
     environment:

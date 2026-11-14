@@ -1,4 +1,5 @@
 import { Controller, Param, Post, Body, HttpCode, Res } from '@nestjs/common';
+import type { Response } from 'express';
 import { OllamaApiService } from './ollama-api.service.js';
 
 const ollamaUrl =
@@ -16,7 +17,7 @@ export class OllamaApiController {
 
 	@Post(':model/chat')
 	@HttpCode(200)
-	async chat(@Param('model') model: string, @Body() body: ChatDto, @Res() res: unknown): Promise<unknown> {
+	async chat(@Param('model') model: string, @Body() body: ChatDto, @Res() res: Response): Promise<unknown> {
 
 		// Tell the browser that we are sending text progressively
 		res.setHeader('Content-Type', 'text/plain; charset=utf-8');
