@@ -5,7 +5,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.dev
 
-    container_name: ai-assistant-frontend-dev
+    container_name: frontend
 
     ports:
       - "5173:5173"
@@ -18,17 +18,17 @@ services:
       - /app/node_modules
 
     depends_on:
-      - ai-assistant-backend
+      - backend
 
     restart: unless-stopped
 
   # NestJS development server
-  ai-assistant-backend:
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
 
-    container_name: ai-assistant-backend-dev
+    container_name: backend
 
     ports:
       - "3000:3000"
