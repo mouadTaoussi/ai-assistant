@@ -152,118 +152,125 @@ const count = ref(0)
 
 <template>
 	<div class="chatpage">
-		<!-- <section class="sidebar">
+		<section class="sidebar">
 			<h2>Sidebar</h2>
 			<p>This is the sidebar content.</p>
-		</section> -->
-		<section class="hello-world" ref="chatContainer">
-			<div class="conversation-history" v-if="conversationHistory.length > 0">
-				<p v-for="(message, index) in conversationHistory" :key="index">
-					<div v-if="message.role === 'user'" class="user-message">
-						<strong>{{ "You" }}:</strong> <span v-html="marked.parse(message.content)"></span>
-					</div>
-					<div v-else class="assistant-message">
-						<strong>{{ "Assistant" }}:</strong> <span v-html="marked.parse(message.content)"></span>
-						<div>
-							<button class="copy-btn" @click="copyText(message,content)">Copy</button>
-							<button class="delete-btn" @click="deleteMessage(index)">Delete</button>
+		</section>
+		<section class="right-area">
+			<header>
+				<h1>This is the header</h1>
+				<span>Untitled chat</span>
+			</header>
+
+			<section class="hello-world" ref="chatContainer">
+				<div class="conversation-history" v-if="conversationHistory.length > 0">
+					<p v-for="(message, index) in conversationHistory" :key="index">
+						<div v-if="message.role === 'user'" class="user-message">
+							<strong>{{ "You" }}:</strong> <span v-html="marked.parse(message.content)"></span>
 						</div>
-					</div>
-				</p>
-				<div class="status" v-if="busy && status == 'Thinking...'">
-					<!--By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL--><!--Todo: add easing-->
-					<svg
-						viewBox="0 0 57 60"
-						xmlns="http://www.w3.org/2000/svg"
-						stroke="white"
-					>
-						<g fill="none" fill-rule="evenodd">
-							<g transform="translate(1 1)" stroke-width="3">
-								<circle cx="5" cy="50" r="5">
-									<animate
-										attributeName="cy"
-										begin="0s"
-										dur="3s"
-										values="50;5;50;50"
-										calcMode="linear"
-										repeatCount="indefinite"
-									/>
-									<animate
-										attributeName="cx"
-										begin="0s"
-										dur="3s"
-										values="5;27;49;5"
-										calcMode="linear"
-										repeatCount="indefinite"
-									/>
-								</circle>
-								<circle cx="27" cy="5" r="5">
-									<animate
-										attributeName="cy"
-										begin="0s"
-										dur="3s"
-										from="5"
-										to="5"
-										values="5;50;50;5"
-										calcMode="linear"
-										repeatCount="indefinite"
-									/>
-									<animate
-										attributeName="cx"
-										begin="0s"
-										dur="3s"
-										from="27"
-										to="27"
-										values="27;49;5;27"
-										calcMode="linear"
-										repeatCount="indefinite"
-									/>
-								</circle>
-								<circle cx="49" cy="50" r="5">
-									<animate
-										attributeName="cy"
-										begin="0s"
-										dur="3s"
-										values="50;50;5;50"
-										calcMode="linear"
-										repeatCount="indefinite"
-									/>
-									<animate
-										attributeName="cx"
-										from="49"
-										to="49"
-										begin="0s"
-										dur="3s"
-										values="49;5;27;49"
-										calcMode="linear"
-										repeatCount="indefinite"
-									/>
-								</circle>
+						<div v-else class="assistant-message">
+							<strong>{{ "Assistant" }}:</strong> <span v-html="marked.parse(message.content)"></span>
+							<div>
+								<button class="copy-btn" @click="copyText(message,content)">Copy</button>
+								<button class="delete-btn" @click="deleteMessage(index)">Delete</button>
+							</div>
+						</div>
+					</p>
+					<div class="status" v-if="busy && status == 'Thinking...'">
+						<!--By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL--><!--Todo: add easing-->
+						<svg
+							viewBox="0 0 57 60"
+							xmlns="http://www.w3.org/2000/svg"
+							stroke="white"
+						>
+							<g fill="none" fill-rule="evenodd">
+								<g transform="translate(1 1)" stroke-width="3">
+									<circle cx="5" cy="50" r="5">
+										<animate
+											attributeName="cy"
+											begin="0s"
+											dur="3s"
+											values="50;5;50;50"
+											calcMode="linear"
+											repeatCount="indefinite"
+										/>
+										<animate
+											attributeName="cx"
+											begin="0s"
+											dur="3s"
+											values="5;27;49;5"
+											calcMode="linear"
+											repeatCount="indefinite"
+										/>
+									</circle>
+									<circle cx="27" cy="5" r="5">
+										<animate
+											attributeName="cy"
+											begin="0s"
+											dur="3s"
+											from="5"
+											to="5"
+											values="5;50;50;5"
+											calcMode="linear"
+											repeatCount="indefinite"
+										/>
+										<animate
+											attributeName="cx"
+											begin="0s"
+											dur="3s"
+											from="27"
+											to="27"
+											values="27;49;5;27"
+											calcMode="linear"
+											repeatCount="indefinite"
+										/>
+									</circle>
+									<circle cx="49" cy="50" r="5">
+										<animate
+											attributeName="cy"
+											begin="0s"
+											dur="3s"
+											values="50;50;5;50"
+											calcMode="linear"
+											repeatCount="indefinite"
+										/>
+										<animate
+											attributeName="cx"
+											from="49"
+											to="49"
+											begin="0s"
+											dur="3s"
+											values="49;5;27;49"
+											calcMode="linear"
+											repeatCount="indefinite"
+										/>
+									</circle>
+								</g>
 							</g>
-						</g>
-					</svg>
+						</svg>
+					</div>
+					<!-- Streamed Response -->
+					<div v-if="responseStream && busy" style="padding: 0.5rem 1rem;">
+						<strong >Assistant:</strong>
+					</div>
+					<div v-if="responseStream && busy" v-html="toMarkdown" class="assistant-message"></div>
 				</div>
-				<!-- Streamed Response -->
-				<div v-if="responseStream && busy" style="padding: 0.5rem 1rem;">
-					<strong >Assistant:</strong>
+				
+				<div class="form-group">
+					<input class="form-control message" v-on:keydown.enter="onSubmit" v-model="messages" type="text" placeholder="Enter your message..." />
+					<select class="form-control model" v-model="model" :disabled="busy">
+						<option value="gemma2:2b">gemma2:2b</option>
+						<option value="phi4-mini">phi4-mini</option>
+						<option value="llama3">llama3</option>
+					</select>
+					<button class="submit-btn" v-if="!busy" type="button" @click="onSubmit" :disabled="busy">
+						Submit
+					</button>
+					<button class="cancel-btn" v-else-if="busy" type="button" @click="onCancel" :disabled="!busy">
+						Cancel
+					</button>
 				</div>
-				<div v-if="responseStream && busy" v-html="toMarkdown" class="assistant-message"></div>
-			</div>
-			
-			<div class="form-group">
-				<input class="form-control message" v-on:keydown.enter="onSubmit" v-model="messages" type="text" placeholder="Enter your message..." />
-				<select class="form-control model" v-model="model" :disabled="busy">
-					<option value="gemma2:2b">gemma2:2b</option>
-					<option value="phi4-mini">phi4-mini</option>
-					<option value="llama3">llama3</option>
-				</select>
-				<button class="submit-btn" v-if="!busy" type="button" @click="onSubmit" :disabled="busy">
-					Submit
-				</button>
-				<button class="cancel-btn" v-else-if="busy" type="button" @click="onCancel" :disabled="!busy">
-					Cancel
-				</button>
-			</div>
+			</section>
 		</section>
 	</div>
 </template>
@@ -277,6 +284,8 @@ const count = ref(0)
     "Noto Color Emoji";
 	font-size: 1.25rem;
 }
+
+/* Page Layout */
 .chatpage {
 	/* display: grid;
 	grid-template-columns: 1fr 3fr;
@@ -289,8 +298,11 @@ const count = ref(0)
 	background-color: #1e1e1e;
 	padding: 1rem;
 	color: white;
+	width: 20%;
 }
-/* Page Layout */
+.right-area {
+	width: 80%;
+}
 .hello-world {
 	background-color: black;
 	display: grid;
@@ -304,6 +316,21 @@ const count = ref(0)
 .status {
 	width: 2.5rem;
 	height: 2.5rem;
+}
+header {
+	width: 100%;
+	background-color: rgb(17, 17, 17);
+	padding: 1% 2%;
+}
+header h1 {
+	font-size: 1.2rem;
+	color: white;
+	margin: 0;
+	font-weight: bold;
+}
+header span {
+	color: #ccc;
+	font-size: 0.9rem;
 }
 /* Conversation History */
 .conversation-history {
