@@ -1,6 +1,6 @@
 {
   "name": "ai-assistant",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "```\r git clone https://github.com/mouadTaoussi/ai-assistant.git\r ```",
   "main": "index.js",
   "scripts": {

@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: ghcr.io/mouadtaoussi/ai-assistant-frontend:${v1.0.0}
+    image: ghcr.io/mouadtaoussi/ai-assistant-frontend:${v1.1.0}
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -10,7 +10,7 @@ services:
     depends_on:
       - backend
   backend:
-    image: ghcr.io/mouadtaoussi/ai-assistant-backend:${v1.0.0}
+    image: ghcr.io/mouadtaoussi/ai-assistant-backend:${v1.1.0}
     build:
       context: ./backend
       dockerfile: Dockerfile
