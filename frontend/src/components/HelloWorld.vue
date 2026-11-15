@@ -183,7 +183,7 @@ const count = ref(0)
 									<animate
 										attributeName="cy"
 										begin="0s"
-										dur="2.8s"
+										dur="3s"
 										values="50;5;50;50"
 										calcMode="linear"
 										repeatCount="indefinite"
@@ -191,7 +191,7 @@ const count = ref(0)
 									<animate
 										attributeName="cx"
 										begin="0s"
-										dur="2.8s"
+										dur="3s"
 										values="5;27;49;5"
 										calcMode="linear"
 										repeatCount="indefinite"
@@ -201,7 +201,7 @@ const count = ref(0)
 									<animate
 										attributeName="cy"
 										begin="0s"
-										dur="2.8s"
+										dur="3s"
 										from="5"
 										to="5"
 										values="5;50;50;5"
@@ -211,7 +211,7 @@ const count = ref(0)
 									<animate
 										attributeName="cx"
 										begin="0s"
-										dur="2.8s"
+										dur="3s"
 										from="27"
 										to="27"
 										values="27;49;5;27"
@@ -223,7 +223,7 @@ const count = ref(0)
 									<animate
 										attributeName="cy"
 										begin="0s"
-										dur="2.8s"
+										dur="3s"
 										values="50;50;5;50"
 										calcMode="linear"
 										repeatCount="indefinite"
@@ -233,7 +233,7 @@ const count = ref(0)
 										from="49"
 										to="49"
 										begin="0s"
-										dur="2.8s"
+										dur="3s"
 										values="49;5;27;49"
 										calcMode="linear"
 										repeatCount="indefinite"
